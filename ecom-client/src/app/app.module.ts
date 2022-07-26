@@ -3,17 +3,37 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { ProductListComponent } from './component/product-list/product-list.component';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/product.service';
+import { RouterModule, Routes } from '@angular/router';
+import { ProductCategoryMenuComponent } from './component/product-category-menu/product-category-menu.component';
+import { SearchComponent } from './component/search/search.component';
+import { ProductDetailsComponent } from './component/product-details/product-details.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
+const routes: Routes = [
+  {path:'search/:keyword',component:ProductListComponent},
+  { path: 'category/:id', component: ProductListComponent },
+  { path: 'category', component: ProductListComponent },
+  { path: 'products', component: ProductListComponent },
+  { path: 'products/:id', component: ProductDetailsComponent },
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
+  { path: '**', redirectTo: '/products', pathMatch: 'full' }
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductCategoryMenuComponent,
+    SearchComponent,
+    ProductDetailsComponent,
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot(routes),
+    NgbModule
   ],
   providers: [ProductService],
   bootstrap: [AppComponent]
