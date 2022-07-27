@@ -10,6 +10,8 @@ import { ProductCategoryMenuComponent } from './component/product-category-menu/
 import { SearchComponent } from './component/search/search.component';
 import { ProductDetailsComponent } from './component/product-details/product-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartStatusComponent } from './component/cart-status/cart-status.component';
+import { CartDetailsComponent } from './component/cart-details/cart-details.component';
 
 const routes: Routes = [
   {path:'search/:keyword',component:ProductListComponent},
@@ -17,6 +19,7 @@ const routes: Routes = [
   { path: 'category', component: ProductListComponent },
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailsComponent },
+  { path: 'cart-details', component: CartDetailsComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
   { path: '**', redirectTo: '/products', pathMatch: 'full' }
 ];
@@ -28,6 +31,8 @@ const routes: Routes = [
     ProductCategoryMenuComponent,
     SearchComponent,
     ProductDetailsComponent,
+    CartStatusComponent,
+    CartDetailsComponent,
   ],
   imports: [
     BrowserModule,

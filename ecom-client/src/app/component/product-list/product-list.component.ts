@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CartItem } from 'src/app/common/cart-item';
 import { Product } from 'src/app/common/product';
+import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 
 @Component({
@@ -20,7 +22,7 @@ export class ProductListComponent implements OnInit {
 
   priviusKeyword: string = "";
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private cartService: CartService) { }
 
   ngOnInit(): void {
 
@@ -40,7 +42,7 @@ export class ProductListComponent implements OnInit {
 
   }
   handleSearchProducts() {
-     const theKeyword = this.route.snapshot.paramMap.get("keyword");
+    const theKeyword = this.route.snapshot.paramMap.get("keyword");
 
     if (this.priviusKeyword != theKeyword) {
       this.thePageNumber = 1;
@@ -92,5 +94,13 @@ export class ProductListComponent implements OnInit {
     this.thePageSize = Number((pageSize.target as HTMLInputElement).value);
     this.thePageNumber = 1;
     this.listProducts();
+  }
+
+  addToCart(product: Product) {
+
+    const theCartItem = new CartItem(product);
+
+    this.cartService.addToCart(theCartItem);
+
   }
 }
